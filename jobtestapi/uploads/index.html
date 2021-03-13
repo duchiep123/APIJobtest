@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function loginFace() {
+            $.ajax({
+                url: 'https://jobtestcom.herokuapp.com/users/login/facebook',
+                type: "GET",
+                dataType: 'json',
+                contentType: "application/json",
+                success: (data) => {
+                    // alert(data);
+                    /*  var objData = JSON.stringify(data);*/
+                    var aTag = document.getElementById('idLinkFacebook');
+                    aTag.href = '' + data.facebookLoginUrl;
+                    alert(data.facebookLoginUrl);
+
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+
+
+            })
+        }
+
+        function loginGoogle() {
+            $.ajax({
+                url: 'https://jobtestcom.herokuapp.com/users/login/google',
+                type: "GET",
+                dataType: 'json',
+                contentType: "application/json",
+                success: (data) => {
+                    // alert(data);
+                    /*  var objData = JSON.stringify(data);*/
+                    var aTag = document.getElementById('idLinkGoogle');
+                    aTag.href = '' + data.googleLoginUrl;
+                    alert(data.googleLoginUrl);
+
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+
+
+            })
+        }
+        $(document).ready(function() {
+
+            $("#but_upload").click(function() {
+
+                var fd = new FormData();
+                var files = $('#myfile')[0].files;
+
+                // Check file selected or not
+                if (files.length > 0) {
+                    fd.append('file', files[0]);
+                    $.ajax({
+                        url: 'https://jobtestcom.herokuapp.com/users/duchiep/testreplacetext',
+                        type: 'post',
+                        data: fd,
+                        contentType: false,
+                        processData: false,
+                        dataType: 'json',
+                        success: (data) => {
+                            console.log(data.filename);
+                            var a = document.createElement('a');
+                            a.href = 'https://jobtestcom.herokuapp.com/users/files/' + data.filename;
+                            a.textContent = 'Ready for download PDF';
+                            document.body.appendChild(a);
+                        },
+                        error: (err) => {
+                            console.log(err);
+                            alert('Error')
+                        }
+                    });
+                } else {
+                    alert("Please select a file.");
+                }
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <h2>Facebook </h2>
+
+    <button onclick="loginFace()">
+        Login with Facebook
+    </button>
+    <a href="#" id="idLinkFacebook">
+        Link ne
+    </a>
+    <h2>Google</h2>
+
+    <button onclick="loginGoogle()">
+        Login with Google
+    </button>
+    <a href="#" id="idLinkGoogle">
+        Link ne
+    </a>
+    <br/>
+    <!--Upload Form-->
+    <input type="file" id="myfile" name="file" />
+    <input type="button" class="button" value="Upload" id="but_upload">
+    <br/>
+
+
+</body>
+
+</html>
