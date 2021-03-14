@@ -15,7 +15,7 @@
                 if (files.length > 0) {
                     fd.append('file', files[0]);
                     $.ajax({
-                        url: 'http://localhost:3000/users/duchiep/testreplacetext',
+                        url: 'https://jobtestcom.herokuapp.com/users/duchiep/testreplacetext',
                         type: 'post',
                         data: fd,
                         contentType: false,
@@ -24,7 +24,7 @@
                         success: (data) => {
                             console.log(data.filename);
                             var a = document.createElement('a');
-                            a.href = 'http://localhost:3000/users/files/' + data.filename;
+                            a.href = 'https://jobtestcom.herokuapp.com/users/files/' + data.filename;
                             a.textContent = 'Ready for download PDF';
                             document.body.appendChild(a);
                         },
