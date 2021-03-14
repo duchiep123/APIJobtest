@@ -4,49 +4,6 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
-        function loginFace() {
-            $.ajax({
-                url: 'https://jobtestcom.herokuapp.com/users/login/facebook',
-                type: "GET",
-                dataType: 'json',
-                contentType: "application/json",
-                success: (data) => {
-                    // alert(data);
-                    /*  var objData = JSON.stringify(data);*/
-                    var aTag = document.getElementById('idLinkFacebook');
-                    aTag.href = '' + data.facebookLoginUrl;
-                    alert(data.facebookLoginUrl);
-
-                },
-                error: (err) => {
-                    console.log(err);
-                }
-
-
-            })
-        }
-
-        function loginGoogle() {
-            $.ajax({
-                url: 'https://jobtestcom.herokuapp.com/users/login/google',
-                type: "GET",
-                dataType: 'json',
-                contentType: "application/json",
-                success: (data) => {
-                    // alert(data);
-                    /*  var objData = JSON.stringify(data);*/
-                    var aTag = document.getElementById('idLinkGoogle');
-                    aTag.href = '' + data.googleLoginUrl;
-                    alert(data.googleLoginUrl);
-
-                },
-                error: (err) => {
-                    console.log(err);
-                }
-
-
-            })
-        }
         $(document).ready(function() {
 
             $("#but_upload").click(function() {
@@ -58,7 +15,7 @@
                 if (files.length > 0) {
                     fd.append('file', files[0]);
                     $.ajax({
-                        url: 'https://jobtestcom.herokuapp.com/users/duchiep/testreplacetext',
+                        url: 'http://localhost:3000/users/duchiep/testreplacetext',
                         type: 'post',
                         data: fd,
                         contentType: false,
@@ -67,7 +24,7 @@
                         success: (data) => {
                             console.log(data.filename);
                             var a = document.createElement('a');
-                            a.href = 'https://jobtestcom.herokuapp.com/users/files/' + data.filename;
+                            a.href = 'http://localhost:3000/users/files/' + data.filename;
                             a.textContent = 'Ready for download PDF';
                             document.body.appendChild(a);
                         },
@@ -87,22 +44,7 @@
 
 <body>
 
-    <h2>Facebook </h2>
-
-    <button onclick="loginFace()">
-        Login with Facebook
-    </button>
-    <a href="#" id="idLinkFacebook">
-        Link ne
-    </a>
-    <h2>Google</h2>
-
-    <button onclick="loginGoogle()">
-        Login with Google
-    </button>
-    <a href="#" id="idLinkGoogle">
-        Link ne
-    </a>
+    <h1>Hide user info</h1>
     <br/>
     <!--Upload Form-->
     <input type="file" id="myfile" name="file" />
